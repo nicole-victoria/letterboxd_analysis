@@ -15,5 +15,5 @@ Mais detalhes sobre a base de dados, clique [aqui](https://www.kaggle.com/datase
 ## 🛠️ Rodar o Projeto Localmente
 
 Após baixar o projeto, abra-o no seu editor de código, como o VSCode e acesse o terminal para dar os seguinte comandos:
-- **pip install - requirements.txt** (instala todas as bibliotecas necessárias)
+- **pip install -r requirements.txt** (instala todas as bibliotecas necessárias)
 - **streamlit run main.py** (abre uma janela no navegador com o Dashboard)
