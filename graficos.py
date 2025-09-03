@@ -1,9 +1,11 @@
 #importacoes
 import plotly.express as px
 import pandas as pd 
+from dataset import df
+from utils import top5_idiomas, df_top10_idiomas, top_10_estudios, top_10_generos
 
 #definicao da paleta de cores do dashboard
-paleta = ["#d2700e", '#00e054', '#40bcf4', "#7013A9", "#ce13c8", "#126432", "#202830", "#0facaf", "#af0f0f", "#0f14af", "#c5ce13"]
+paleta = ["#d2700e", '#00e054', '#40bcf4', "#7013A9", "#ce13c8", "#126432", "#202830", "#0facaf"]
 
 # funcao que cria o gráfico de barras   
 def grafico_barras(x, y, titulo, nome_x='Eixo X', nome_y='Eixo Y', legenda=None, barmode='group', rotulo=False, color= paleta):
@@ -42,12 +44,12 @@ def grafico_barras(x, y, titulo, nome_x='Eixo X', nome_y='Eixo Y', legenda=None,
             'xanchor': 'center', 
             'font': {
             'size': 18,           # <-- aumenta o tamanho do título
-            'color': '#202830',   # opcional: cor do título
+            'color':' #ffffff',   # opcional: cor do título
             'family': 'Arial'     # opcional: fonte do título
         }},
         yaxis={'categoryorder': 'total ascending'},
-        plot_bgcolor= "#e3f2fd",
-        paper_bgcolor="#e3f2fd", 
+        plot_bgcolor= 'rgba(0,0,0,0)',
+        paper_bgcolor='rgba(0,0,0,0)',
     )
 
     #configurações adicionar quando houver rótulo
@@ -127,3 +129,29 @@ def grafico_hist(x, titulo, nome_x):
 
     return fig #retorna a figura criada
 
+
+
+# "Instâncias dos gráficos"
+#----------------------
+
+# Criação do gráfico dos 10 gêneros mais assistidos
+grafico_generos = grafico_barras(x=top_10_generos['Watches'], y=top_10_generos['Genres'],
+                                titulo= 'Top 10 gêneros mais assistidos', nome_y='Streams', nome_x='Gênero')
+
+# Criação do gráfico dos 10 estúdios mais assistidos
+grafico_estudios = grafico_barras(x=top_10_estudios['Watches'], y=top_10_estudios['Studios'],
+        titulo= 'Top 10 estúdios com maiores audiências', nome_y='Streams', nome_x='Estúdio')
+
+# Criação do gráfico dos 5 idiomas originais mais populares
+grafico_top_idiomas = grafico_pizza(x=top5_idiomas.index, y=top5_idiomas.values,
+        titulo='Top 5 Idiomas Originais mais populares' )
+
+# Criação do gráfico dos 10 idiomas populares e nota Média
+grafico_notas_idiomas = grafico_barras(
+        x=df_top10_idiomas['nota_media'],
+        y=df_top10_idiomas['idioma_original'],
+        titulo='Top 10 idiomas Originais mais populares e nota média',
+        nome_y='Idioma Original',
+        nome_x='Nota Média',
+        rotulo=True
+    )
